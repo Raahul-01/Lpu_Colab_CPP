@@ -1,0 +1,31 @@
+#include <iostream>
+
+using namespace std;
+
+class DateFormatConverter {
+private:
+    int day;
+    int month;
+    int year;
+
+public:
+    DateFormatConverter(int d, int m, int y) : day(d), month(m), year(y) {}
+
+    friend ostream& operator<<(ostream& os, const DateFormatConverter& date) {
+        os << "Date in DD-MM-YYYY format: ";
+        os << date.day << "-" << date.month << "-" << date.year;
+        return os;
+    }
+};
+
+int main() {
+    int day, month, year;
+    cout << "Enter date in MM/DD/YYYY format: ";
+    cin >> month >> day >> year;
+
+    DateFormatConverter date(day, month, year);
+
+    cout << date << endl;
+
+    return 0;
+}
