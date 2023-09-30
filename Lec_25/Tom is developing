@@ -1,0 +1,28 @@
+#include <iostream>
+
+class TimeConverter {
+private:
+    int hours;
+    int minutes;
+
+public:
+    TimeConverter(int h = 0, int m = 0) : hours(h), minutes(m) {}
+
+    operator int() const {
+        // Convert hours to minutes and add to the existing minutes.
+        return (hours * 60) + minutes;
+    }
+};
+
+int main() {
+    int hours, minutes;
+    std::cout << " ";
+    std::cin >> hours >> minutes;
+
+    TimeConverter time(hours, minutes);
+    int totalMinutes = time;
+
+    std::cout << totalMinutes << " mins" << std::endl;
+
+    return 0;
+}
