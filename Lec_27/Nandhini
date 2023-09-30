@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+class Vehicle {
+protected:
+    float distance;
+
+public:
+    Vehicle(float d) : distance(d) {}
+
+    float calculateSpeed(float time) {
+        if (time == 0.0) {
+            return 0.0;
+        }
+        return distance / time;
+    }
+};
+
+class Car : public Vehicle {
+public:
+    Car(float d) : Vehicle(d) {}
+
+    void displaySpeed(float time) {
+        float speed = calculateSpeed(time);
+        cout << "Speed of car: " << speed << " km/hr" << endl;
+    }
+};
+
+int main() {
+    float distance, time;
+    cin >> distance >> time;
+
+    Car car(distance);
+    car.displaySpeed(time);
+
+    return 0;
+}
