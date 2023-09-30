@@ -1,0 +1,34 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+class Temperature {
+private:
+    double celsius;
+    double fahrenheit;
+
+public:
+    Temperature(double c) : celsius(c) {
+        fahrenheit = (celsius * 9/5) + 32;
+    }
+
+    friend ostream& operator<<(ostream& os, const Temperature& temp) {
+        os << fixed << setprecision(2);
+        os << temp.celsius << " degree celsius" << endl;
+        os << temp.fahrenheit << " degree fahrenheit";
+        return os;
+    }
+};
+
+int main() {
+    double celsius;
+    cout << "Enter temperature in degree Celsius: ";
+    cin >> celsius;
+
+    Temperature temp(celsius);
+
+    cout << temp << endl;
+
+    return 0;
+}
