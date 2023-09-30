@@ -1,0 +1,28 @@
+// You are using GCC
+#include <iostream>
+using namespace std;
+
+class Parent {
+public:
+    void add(int a, int b) {
+        cout << a + b << endl;
+    }
+};
+
+class Child : public Parent {
+public:
+    void sub(int a, int b) {
+        cout << a - b << endl;
+    }
+};
+
+int main() {
+    int integer1, integer2;
+    cin >> integer1 >> integer2;
+
+    Child child;
+    child.add(integer1, integer2);
+    child.sub(integer1, integer2);
+
+    return 0;
+}
