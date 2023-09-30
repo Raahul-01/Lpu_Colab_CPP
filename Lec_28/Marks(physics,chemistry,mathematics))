@@ -1,0 +1,94 @@
+// You are using GCC
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Marks {
+protected:
+    int rollNumber;
+    string name;
+    int totalMarks;
+
+public:
+    static int currentRollNumber;
+
+    Marks() {
+        rollNumber = ++currentRollNumber;
+        totalMarks = 0;
+    }
+
+    void setName(string studentName) {
+        name = studentName;
+    }
+
+    void calculateTotal(int physics, int chemistry, int mathematics) {
+        totalMarks = physics + chemistry + mathematics;
+    }
+
+    int getTotalMarks() const { // Added this getter function
+        return totalMarks;
+    }
+
+    void display() {
+        cout << "Roll Number: " << rollNumber << endl;
+        cout << "Name: " << name << endl;
+        cout << "Total marks: " << totalMarks << endl << endl;
+    }
+};
+
+int Marks::currentRollNumber = 0;
+
+class Physics : public Marks {
+public:
+    Physics() {
+        // No additional constructor logic needed
+    }
+};
+
+class Chemistry : public Marks {
+public:
+    Chemistry() {
+        // No additional constructor logic needed
+    }
+};
+
+class Mathematics : public Marks {
+public:
+    Mathematics() {
+        // No additional constructor logic needed
+    }
+};
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<Marks*> students;
+
+    for (int i = 0; i < n; i++) {
+        string name;
+        int physics, chemistry, mathematics;
+        cin >> name >> physics >> chemistry >> mathematics;
+
+        Marks* student = new Marks();
+        student->setName(name);
+        student->calculateTotal(physics, chemistry, mathematics);
+        students.push_back(student);
+    }
+
+    int totalClassMarks = 0;
+    for (Marks* student : students) {
+        student->display();
+        totalClassMarks += student->getTotalMarks(); // Using the getter function
+        delete student;
+    }
+
+    double averageClassMarks = static_cast<double>(totalClassMarks) / n;
+
+    cout << "Total marks of the class is: " << totalClassMarks << endl;
+    cout << "The average marks of the class is: " << averageClassMarks << endl;
+
+    return 0;
+}
