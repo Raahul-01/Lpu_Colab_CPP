@@ -1,0 +1,32 @@
+#include <iostream>
+#include <string>
+
+class FullName {
+private:
+    std::string firstName;
+    std::string lastName;
+
+public:
+    FullName(const std::string& first, const std::string& last) : firstName(first), lastName(last) {}
+
+    operator std::string() const {
+        return firstName + " " + lastName;
+    }
+};
+
+int main() {
+    std::string firstName, lastName;
+
+    std::cout << " ";
+    std::getline(std::cin, firstName);
+
+    std::cout << " ";
+    std::getline(std::cin, lastName);
+
+    FullName fullName(firstName, lastName);
+    std::string full_name_str = fullName;
+
+    std::cout << full_name_str << std::endl;
+
+    return 0;
+}
