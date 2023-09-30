@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+
+class Matrix {
+private:
+    int rows;
+    int cols;
+    std::vector<std::vector<int>> data;
+
+public:
+    Matrix(int r, int c) : rows(r), cols(c) {
+        data.resize(rows, std::vector<int>(cols));
+    }
+
+    void inputMatrix() {
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                std::cin >> data[i][j];
+            }
+        }
+    }
+
+    void displayMatrix() {
+        std::cout << "Matrix:" << std::endl;
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                std::cout << data[i][j] << ' ';
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    operator std::vector<int>() const {
+        std::vector<int> columnMajorArray;
+        columnMajorArray.reserve(rows * cols);
+        for (int j = 0; j < cols; ++j) {
+            for (int i = 0; i < rows; ++i) {
+                columnMajorArray.push_back(data[i][j]);
+            }
+        }
+        return columnMajorArray;
+    }
+};
+
+int main() {
+    int rows, cols;
+    std::cin >> rows >> cols;
+
+    Matrix matrix(rows, cols);
+    matrix.inputMatrix();
+
+    matrix.displayMatrix();
+
+    std::vector<int> columnMajorArray = matrix;
+
+    std::cout << "\nColumn-Major Array:" << std::endl;
+    for (int element : columnMajorArray) {
+        std::cout << element << ' ';
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
