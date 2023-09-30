@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Rectangle {
+private:
+    double length;
+    double width;
+
+public:
+    Rectangle(double l, double w) : length(l), width(w) {}
+
+    double getPerimeter() const {
+        return 2 * (length + width);
+    }
+};
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<Rectangle> rectangles;
+
+    for (int i = 0; i < n; i++) {
+        double l, w;
+        cin >> l >> w;
+        rectangles.push_back(Rectangle(l, w));
+    }
+
+    double smallestPerimeter = rectangles[0].getPerimeter();
+
+    for (int i = 0; i < n; i++) {
+        double perimeter = rectangles[i].getPerimeter();
+        cout << "Perimeter of rectangle " << (i + 1) << ": " << perimeter << endl;
+        if (perimeter < smallestPerimeter) {
+            smallestPerimeter = perimeter;
+        }
+    }
+
+    cout << "Perimeter of the smallest rectangle: " << smallestPerimeter << endl;
+
+    return 0;
+}
