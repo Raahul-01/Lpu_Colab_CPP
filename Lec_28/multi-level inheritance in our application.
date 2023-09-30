@@ -1,0 +1,99 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class SilverStall {
+protected:
+    string name;
+    string detail;
+    string owner;
+    int cost;
+
+public:
+    SilverStall() {
+        name = "";
+        detail = "";
+        owner = "";
+        cost = 0;
+    }
+
+    SilverStall(string n, string d, string o, int c) {
+        name = n;
+        detail = d;
+        owner = o;
+        cost = c;
+    }
+
+    int getCost() {
+        return cost;
+    }
+};
+
+class GoldStall : public SilverStall {
+protected:  // Change the access level to protected
+    int tvSet;
+
+public:
+    GoldStall() : SilverStall() {
+        tvSet = 0;
+    }
+
+    GoldStall(string n, string d, string o, int c, int tv) : SilverStall(n, d, o, c) {
+        tvSet = tv;
+    }
+
+    int getCost() {
+        return cost + tvSet * 100;
+    }
+};
+
+class PlatinumStall : public GoldStall {
+private:
+    int projector;
+
+public:
+    PlatinumStall() : GoldStall() {
+        projector = 0;
+    }
+
+    PlatinumStall(string n, string d, string o, int c, int tv, int proj) : GoldStall(n, d, o, c, tv) {
+        projector = proj;
+    }
+
+    int getCost() {
+        return cost + tvSet * 100 + projector * 500;
+    }
+};
+
+int main() {
+    int n;
+    cin >> n;
+
+    if (n == 1) {
+        string name, detail, owner;
+        int cost;
+        cin >> name >> detail >> owner >> cost;
+
+        SilverStall s(name, detail, owner, cost);
+        cout << s.getCost() << endl;
+    } else if (n == 2) {
+        string name, detail, owner;
+        int cost, tvSet;
+        cin >> name >> detail >> owner >> cost >> tvSet;
+
+        GoldStall g(name, detail, owner, cost, tvSet);
+        cout << g.getCost() << endl;
+    } else if (n == 3) {
+        string name, detail, owner;
+        int cost, tvSet, projector;
+        cin >> name >> detail >> owner >> cost >> tvSet >> projector;
+
+        PlatinumStall p(name, detail, owner, cost, tvSet, projector);
+        cout << p.getCost() << endl;
+    } else {
+        cout << "Invalid Input" << endl;
+    }
+
+    return 0;
+}
