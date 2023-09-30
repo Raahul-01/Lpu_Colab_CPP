@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class MyString {
+private:
+    string str;
+
+public:
+    MyString(const string& s) : str(s) {}
+
+    MyString operator+(const MyString& other) {
+        return MyString(str + other.str);
+    }
+
+    MyString operator*(int n) {
+        string result;
+        for (int i = 0; i < n; i++) {
+            result += str;
+        }
+        return MyString(result);
+    }
+
+    string getString() {
+        return str;
+    }
+};
+
+int main() {
+    string str1, str2;
+    int n;
+
+    // Read input
+    getline(cin, str1);
+    getline(cin, str2);
+    cin >> n;
+    cin.ignore();  // Consume the newline character
+
+    // Create MyString objects
+    MyString myStr1(str1);
+    MyString myStr2(str2);
+
+    // Perform string operations
+    MyString concatResult = myStr1 + myStr2;
+    MyString repeatStr1 = myStr1 * n;
+    MyString repeatStr2 = myStr2 * n;
+
+    // Output the results
+    cout << concatResult.getString() << endl;
+    cout << repeatStr1.getString() << endl;
+    cout << repeatStr2.getString() << endl;
+
+    return 0;
+}
