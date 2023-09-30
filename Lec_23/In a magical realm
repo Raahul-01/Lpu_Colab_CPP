@@ -1,0 +1,50 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+class RepeatableString {
+private:
+    char str[101];
+
+public:
+    RepeatableString(const char* s) {
+        strncpy(str, s, sizeof(str) - 1);
+        str[sizeof(str) - 1] = '\0';
+    }
+
+    RepeatableString operator*(int n) {
+        char result[101];
+        result[0] = '\0';
+
+        for (int i = 0; i < n; i++) {
+            strcat(result, str);
+        }
+
+        return RepeatableString(result);
+    }
+
+    const char* getString() const {
+        return str;
+    }
+};
+
+int main() {
+    char inputStr[101];
+    int repetitions;
+
+    // Read input
+    cin.getline(inputStr, sizeof(inputStr));
+    cin >> repetitions;
+
+    // Create RepeatableStringobject
+    RepeatableString rs(inputStr);
+
+    // Perform the repetition operation
+    RepeatableString result = rs * repetitions;
+
+    // Output the result
+    cout << "Result: " << result.getString() << endl;
+
+    return 0;
+}
