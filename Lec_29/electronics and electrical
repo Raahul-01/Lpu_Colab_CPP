@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class PoweredDevice {
+protected:
+    int power;
+
+public:
+    PoweredDevice(int power) : power(power) {}
+
+    void display() {
+        cout << "Power: " << power << endl;
+    }
+};
+
+class Scanner : public PoweredDevice {
+private:
+    string scannerName;
+
+public:
+    Scanner(string scannerName, int power) : PoweredDevice(power), scannerName(scannerName) {}
+
+    void display() {
+        PoweredDevice::display();
+        cout << "Scanner: " << scannerName << " ";
+    }
+};
+
+class Printer : public PoweredDevice {
+private:
+    string printerName;
+
+public:
+    Printer(string printerName, int power) : PoweredDevice(power), printerName(printerName) {}
+
+    void display() {
+        PoweredDevice::display();
+        cout << "Printer: " << printerName << " ";
+    }
+};
+
+class Copier {
+private:
+    Scanner scanner;
+    Printer printer;
+
+public:
+    Copier(string scannerName, string printerName, int power)
+        : scanner(scannerName, power), printer(printerName, power) {}
+
+    void display() {
+        scanner.display();
+        printer.display();
+    }
+};
+
+int main() {
+    int choice;
+    cin >> choice;
+
+    if (choice == 1) {
+        string scannerName, printerName;
+        int power;
+        cin >> scannerName >> printerName >> power;
+
+        Copier copier(scannerName, printerName, power);
+        copier.display();
+    } else if (choice == 2) {
+        string printerName;
+        int power;
+        cin >> printerName >> power;
+
+        Printer printer(printerName, power);
+        printer.display();
+    } else if (choice == 3) {
+        string scannerName;
+        int power;
+        cin >> scannerName >> power;
+
+        Scanner scanner(scannerName, power);
+        scanner.display();
+    } else {
+        cout << "Invalid choice" << endl;
+    }
+
+    return 0;
+}
