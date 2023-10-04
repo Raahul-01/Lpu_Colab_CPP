@@ -1,0 +1,58 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+class ItemType {
+public:
+    virtual double calculateAmount() {
+        return 0.0;
+    }
+};
+
+class wooden : public ItemType {
+private:
+    int noOfItems;
+    double cost;
+
+public:
+    wooden(int noOfItems, double cost) : noOfItems(noOfItems), cost(cost) {}
+
+    double calculateAmount() override {
+        return noOfItems * cost;
+    }
+};
+
+class electronics : public ItemType {
+private:
+    double cost;
+
+public:
+    electronics(double cost) : cost(cost) {}
+
+    double calculateAmount() override {
+        return cost * 0.8;  // 20% discount
+    }
+};
+
+int main() {
+    int choice;
+    cin >> choice;
+
+    if (choice == 1) {
+        int noOfItems;
+        double cost;
+        cin >> noOfItems >> cost;
+
+        wooden w(noOfItems, cost);
+        cout << fixed << setprecision(2) << w.calculateAmount() << endl;
+    } else if (choice == 2) {
+        double cost;
+        cin >> cost;
+
+        electronics e(cost);
+        cout << fixed << setprecision(2) << e.calculateAmount() << endl;
+    }
+
+    return 0;
+}
