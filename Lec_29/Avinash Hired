@@ -1,0 +1,78 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+// Base class representing a student
+class Student {
+protected:
+    int studentID;
+
+public:
+    Student(int id) : studentID(id) {}
+
+    void displayStudentInfo() {
+        cout << "ID: " << studentID << endl;
+    }
+};
+
+// Virtual base class for academic marks
+class AcademicMarks {
+protected:
+    double mark1;
+    double mark2;
+
+public:
+    AcademicMarks(double m1, double m2) : mark1(m1), mark2(m2) {}
+
+    void displayAcademicMarks() {
+        cout << "Mark 1: " << fixed << setprecision(1) << mark1 << endl;
+        cout << "Mark 2: " << fixed << setprecision(1) << mark2 << endl;
+    }
+};
+
+// Virtual base class for sports-related marks
+class SportsMarks {
+protected:
+    double score;
+
+public:
+    SportsMarks(double s) : score(s) {}
+
+    void displaySportsMarks() {
+        cout << "Score: " << fixed << setprecision(1) << score << endl;
+    }
+};
+
+// Derived class to calculate and display total score
+class TotalMarks : public Student, public AcademicMarks, public SportsMarks {
+public:
+    TotalMarks(int id, double m1, double m2, double s)
+        : Student(id), AcademicMarks(m1, m2), SportsMarks(s) {}
+
+    void displayTotalScore() {
+        double total = mark1 + mark2 + score;
+        cout << "Total score: " << fixed << setprecision(1) << total << endl;
+    }
+};
+
+int main() {
+    int id;
+    double m1, m2, s;
+
+    cin >> id >> m1 >> m2 >> s;
+
+    if (m1 < 0 || m1 > 100) {
+        cout << "Invalid mark 1. Only enter values between 0 and 100" << endl;
+        return 1;
+    }
+
+    TotalMarks student(id, m1, m2, s);
+
+    student.displayStudentInfo();
+    student.displayAcademicMarks();
+    student.displaySportsMarks();
+    student.displayTotalScore();
+
+    return 0;
+}
