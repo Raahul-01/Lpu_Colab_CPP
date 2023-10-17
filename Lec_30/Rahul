@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+
+class Shape {
+public:
+    Shape(const std::string& name) : name(name) {
+        std::cout << "Shape Constructor: Creating a shape - " << name << std::endl;
+    }
+
+    virtual double getArea() const = 0;
+
+    ~Shape() {
+        std::cout << "Shape Destructor: Destroying a shape - " << name << std::endl;
+    }
+
+protected:
+    std::string name;
+};
+
+class Circle : public Shape {
+public:
+    Circle(const std::string& name, float radius) : Shape(name), radius(radius) {
+        std::cout << "Circle Constructor: Creating a circle - " << name << std::endl;
+    }
+
+    double getArea() const override {
+        return 3.14 * radius * radius;
+    }
+
+    ~Circle() {
+        std::cout << "Circle Destructor: Destroying a circle - " << name << std::endl;
+    }
+
+private:
+float radius;
+};
+
+class Square : public Shape {
+public:
+    Square(const std::string& name, float side) : Shape(name), side(side) {
+        std::cout << "Square Constructor: Creating a square - " << name << std::endl;
+    }
+
+    double getArea() const override {
+        return side * side;
+    }
+
+    ~Square() {
+        std::cout << "Square Destructor: Destroying a square - " << name << std::endl;
+    }
+
+private:
+    float side;
+};
+
+int main() {
+    std::string circleName, squareName;
+    float circleRadius, squareSide;
+
+    std::cin >> circleName >> circleRadius >> squareName >> squareSide;
+
+    Circle circle(circleName, circleRadius);
+    Square square(squareName, squareSide);
+
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Area of " << circleName << ": " << circle.getArea() << std::endl;
+    std::cout << "Area of " << squareName << ": " << square.getArea() << std::endl;
+
+    return 0;
+}
